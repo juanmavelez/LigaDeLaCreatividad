@@ -1,13 +1,23 @@
 class mouseCharacter extends HTMLElement {
+  /**
+   * @param {string} color Main color of the mouse
+   * @param {string} color2 Eyes and inner ear color
+   * @param {number} size Allow us to create different sizes of mouses
+   * @param {string}  axiesx  Change the view of the mouse the only valid arguments are: "center" "left" and "right"
+   * @param {string}  axiesy Change the view of the mouse the only valid arguments are: "center" "top" and "bottom"
+   */
   constructor() {
     super();
     this.color = '#292525';
     this.color2 = '#f7ebeb';
     this.size = 1;
+    this.axiesX = 'center';
+    this.axiesY = 'center';
     this.attachShadow({ mode: 'open' });
   }
+
   static get observedAttributes() {
-    return ['color', 'color2', 'size'];
+    return ['color', 'color2', 'size', 'axiesx', 'axiesy'];
   }
   attributeChangedCallback(attr, oldVal, newVal) {
     if (attr === 'color') {
@@ -19,19 +29,39 @@ class mouseCharacter extends HTMLElement {
     if (attr === 'size') {
       this.size = newVal;
     }
+    if (attr === 'profile') {
+      this.axiesX = newVal;
+    }
+    if (attr === 'axiesx') {
+      this.axiesX = newVal;
+    }
+    if (attr === 'axiesy') {
+      this.axiesY = newVal;
+    }
   }
 
+  /**
+   * manipulates the view of the eyes and ears. depending to wich side is the mouse facing
+   * @param {string} face  Should only be "center", "left", "right"
+   * @returns {string} 'none' or block
+   */
+  axiesXfacing(face) {
+    if (this.axiesX === face) {
+      return 'none';
+    }
+    return 'block';
+  }
   getTemplate() {
     const template = document.createElement('template');
     template.innerHTML = `
       <div class="head">
         <div class="face"></div>
-        <div class="ear ear--left"></div>
-        <div class="inner__ear inner__ear--left"></div>
-        <div class="ear ear--right"></div>
-        <div class="inner__ear inner__ear--right"></div>
-        <div class="eye eye--left"></div>
-        <div class="eye eye--right"></div>
+        <div class="ear ear--left ear--${this.axiesY}"></div>
+        <div class="inner__ear inner__ear--left inner__ear--${this.axiesY}" ></div>
+        <div class="ear ear--right ear--${this.axiesY}"></div>
+        <div class="inner__ear inner__ear--right inner__ear--${this.axiesY}"></div>
+        <div class="eye eye--left  eye--${this.axiesY}"></div>
+        <div class="eye eye--right eye--${this.axiesY}"></div>
       </div>
       ${this.getStyles()}
   `;
@@ -43,7 +73,7 @@ class mouseCharacter extends HTMLElement {
     .head{
       position: relative;
       width:  ${30 * this.size}px;
-      height: ${30 * this.size} px;
+      height: ${30 * this.size}px;
     }
     .face{
       position: absolute;
@@ -52,8 +82,9 @@ class mouseCharacter extends HTMLElement {
       height: ${30 * this.size}px;
       border-radius: 100%;
       background-color: ${this.color};
-      box-shadow: -1px 9px 10px #00000066;
+      box-shadow: -1px 6px 20px 0px black;
     }
+
     .ear{
       position: absolute;
       top:    ${-10 * this.size}px;
@@ -62,12 +93,22 @@ class mouseCharacter extends HTMLElement {
       background-color: ${this.color};
       border-radius: 100%;
     }
+    .ear--top{
+      top: ${5.5 * this.size}px;
+    }
+    .ear--bottom{
+      top: ${-12 * this.size}px;
+    }
     .ear--left{
-      left:   ${-10 * this.size}px;
+      display: ${this.axiesXfacing('left')};
+      left:    ${-10 * this.size}px;
     }
     .ear--right{
-      right:  ${-10 * this.size}px
+      display: ${this.axiesXfacing('right')};
+      right:   ${-10 * this.size}px;
     }
+
+
     .inner__ear{
       position: absolute;
       top:    ${-3 * this.size}px;
@@ -77,12 +118,19 @@ class mouseCharacter extends HTMLElement {
       border-radius: 100%;
       background-color: ${this.color2};
     }
+    .inner__ear--top{
+      top: ${8 * this.size}px;
+    }
     .inner__ear--left{
-      left:   ${-3 * this.size}px;
+      display: ${this.axiesXfacing('left')};
+      left:    ${-3 * this.size}px;
     }
     .inner__ear--right{
-      right:  ${-3 * this.size}px;
+      display: ${this.axiesXfacing('right')};
+      right:   ${-3 * this.size}px;
     }
+
+
     .eye{
       position: absolute;
       z-index: 15;
@@ -92,11 +140,19 @@ class mouseCharacter extends HTMLElement {
       border-radius: 100%;
       background-color: ${this.color2};
     }
+    .eye--top{
+      top:    ${3.5 * this.size}px;
+    }
+    .eye--bottom{
+      top:${15 * this.size}px;
+    }
     .eye--left{
-      left:   ${5 * this.size}px
+      display: ${this.axiesXfacing('right')};
+      left:    ${5 * this.size}px
     }
     .eye--right{
-      right:  ${5 * this.size}px;
+      display: ${this.axiesXfacing('left')};
+      right:   ${5 * this.size}px;
     }
     </style>
     `;

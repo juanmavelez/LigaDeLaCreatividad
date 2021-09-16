@@ -1,6 +1,11 @@
 html, body{display:grid;width:100vw; height:100vh;justify-content: center;align-items: center;}
 *{ box-sizing: border-box; margin:0; padding: 0;}
 li,ul{list-style: none;}
+
+body{
+  background: #F2E6CE;
+
+}
 ul{
   display: grid;
   width: 80vw;
@@ -15,7 +20,9 @@ article{
   min-width: 300px;
   height: 100%;
   min-height: 200px;
-  background-color: rgba(194, 81, 57,0.75);
+  border-radius: 5px;
+  border: solid 2px black;
+  background: linear-gradient(#F2B705,#d6c913);
   justify-self: center;
   align-items: center;
 }
