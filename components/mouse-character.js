@@ -1,8 +1,8 @@
 class mouseCharacter extends HTMLElement {
   constructor() {
     super();
-    this.color = 'black';
-    this.color2 = 'white';
+    this.color = '#292525';
+    this.color2 = '#f7ebeb';
     this.size = 1;
     this.attachShadow({ mode: 'open' });
   }
@@ -52,6 +52,7 @@ class mouseCharacter extends HTMLElement {
       height: ${30 * this.size}px;
       border-radius: 100%;
       background-color: ${this.color};
+      box-shadow: -1px 9px 10px #00000066;
     }
     .ear{
       position: absolute;

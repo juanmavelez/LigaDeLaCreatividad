@@ -3,7 +3,11 @@ html, body{display:grid;width:100vw; height:100vh;justify-content: center;align-
 li,ul{list-style: none;}
 ul{
   display: grid;
-  grid-template-columns: repeat(fit-content, minmax(300px,20%))
+  width: 80vw;
+  grid-template-columns: repeat(auto-fill, minmax(300px,20%));
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 article{
   position: relative;
@@ -15,8 +19,45 @@ article{
   justify-self: center;
   align-items: center;
 }
-.mouse{
+
+.section1 .mouse{
   position: absolute;
   left: calc(30% - 45px);
-  top: calc(50% - 45px)
+  top: calc(50%)
+}
+.section1 .chat-box{
+  position: absolute;
+  justify-self: flex-end;
+  right: 10px;
+  top: 10px;
+}
+
+.section2 .mouse:nth-of-type(1){
+  position: absolute;
+  left: 35%;
+  top: 50%;
+}
+.section2 .mouse:nth-of-type(2){
+  position: absolute;
+  opacity: 0.8;
+  left: 10%;
+  top: 50%
+}
+.section2 .mouse:nth-of-type(3){
+  position: absolute;
+  opacity: 0.9;
+  left: 20%;
+  top: 50%
+}
+.section2 .mouse:nth-of-type(4){
+  position: absolute;
+  opacity: 0.8;
+  left: 70%;
+  top: 50%
+}
+.section2 .mouse:nth-of-type(5){
+  position: absolute;
+  opacity: 0.9;
+  left: 55%;
+  top: 50%
 }
