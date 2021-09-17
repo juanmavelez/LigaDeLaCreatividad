@@ -1,4 +1,4 @@
-class mouseCharacter extends HTMLElement {
+class MouseCharacter extends HTMLElement {
   /**
    * @param {string} color Main color of the mouse
    * @param {string} color2 Eyes and inner ear color
@@ -32,10 +32,10 @@ class mouseCharacter extends HTMLElement {
     if (attr === 'profile') {
       this.axiesX = newVal;
     }
-    if (attr === 'axiesx') {
+    if (attr === 'axiesx' && (newVal === 'left' || newVal === 'right')) {
       this.axiesX = newVal;
     }
-    if (attr === 'axiesy') {
+    if (attr === 'axiesy' && (newVal === 'top' || newVal === 'bottom')) {
       this.axiesY = newVal;
     }
   }
@@ -165,4 +165,4 @@ class mouseCharacter extends HTMLElement {
   }
 }
 
-customElements.define('mouse-character', mouseCharacter);
+customElements.define('mouse-character', MouseCharacter);

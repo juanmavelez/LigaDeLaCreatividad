@@ -1,4 +1,4 @@
-class chatBox extends HTMLElement {
+class ChatBox extends HTMLElement {
   constructor() {
     super();
     this.radius = '0';
@@ -35,7 +35,7 @@ class chatBox extends HTMLElement {
         width: fit-content;
         border: solid 1px black;
         background-color:${this.color};
-        border-radius: ${this.radius};
+        border-radius:   ${this.radius};
         text-align: center;
         justify-content: center;
         align-items: center;
@@ -52,4 +52,4 @@ class chatBox extends HTMLElement {
   }
 }
 
-customElements.define('chat-box', chatBox);
+customElements.define('chat-box', ChatBox);
